@@ -6,17 +6,17 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
-public class User {
+public class Admin {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String employeeId; // 教师工号
+    private String adminId; // 管理员工号
     private String name; // 姓名
     private String password; // 密码
 
     // 默认构造函数
-    public User() {
+    public Admin() {
     }
 
     // Getter 和 Setter 方法
@@ -28,12 +28,12 @@ public class User {
         this.id = id;
     }
 
-    public String getEmployeeId() {
-        return employeeId;
+    public String getAdminId() {
+        return adminId;
     }
 
-    public void setEmployeeId(String employeeId) {
-        this.employeeId = employeeId;
+    public void setAdminId(String adminId) {
+        this.adminId = adminId;
     }
 
     public String getName() {

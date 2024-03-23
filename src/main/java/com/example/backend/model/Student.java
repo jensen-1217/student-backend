@@ -19,6 +19,7 @@ public class Student {
     private String address; // 家庭住址
     private String phoneNumber; // 电话
     private String idCardNumber; // 身份证号
+    private String className; // 班级名称
 
     // 默认构造函数
     public Student() {
@@ -97,6 +98,14 @@ public class Student {
         this.idCardNumber = idCardNumber;
     }
 
+    public String getClassName() {
+        return className;
+    }
+
+    public void setClassName(String className) {
+        this.className = className;
+    }
+
     // toString 方法（可选）
     @Override
     public String toString() {
@@ -110,6 +119,7 @@ public class Student {
                 ", address='" + address + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
                 ", idCardNumber='" + idCardNumber + '\'' +
+                ", className='" + className + '\'' +
                 '}';
     }
 }

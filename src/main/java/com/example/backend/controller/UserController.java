@@ -22,28 +22,11 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping("/init")
-    public String initializeUsers() {
-        // 检查是否已经存在管理员用户
-        User existingUser = userService.findByEmployeeId("20561340209");
-        if (existingUser != null) {
-            return "User initialization skipped. Admin user already exists.";
-        }
 
-        // 创建管理员用户并保存到数据库
-        User adminUser = new User();
-        adminUser.setEmployeeId("20561340209");
-        adminUser.setName("管理员");
-        String encryptedPassword = PasswordUtil.encryptPassword("123456");
-        adminUser.setPassword(encryptedPassword);
-        userService.addUser(adminUser);
-
-        return "User initialization successful. Admin user created.";
-    }
 
     @PostMapping("/add")
     public ResponseEntity<Map<String,Object>> addUser(@RequestBody User user) {
-           // 对学生密码进行加密
+           // 对用户密码进行加密
     String encryptedPassword = PasswordUtil.encryptPassword(user.getPassword());
     user.setPassword(encryptedPassword);
     
@@ -63,6 +46,33 @@ public class UserController {
     }
 
 
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<?> deleteUser(@PathVariable Long id) {
+        boolean deleted = userService.deleteUser(id);
+        if (deleted) {
+            return ResponseEntity.ok().build();
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @PutMapping("/updatePassword/{id}")
+    public ResponseEntity<Void> updatePassword(@PathVariable Long id, @RequestBody Map<String, String> requestBody) {
+        String newPassword = requestBody.get("newPassword");
+        if (newPassword != null && !newPassword.isEmpty()) {
+            User user = userService.getUserById(id);
+            if (user !=null) {
+                user.setPassword(newPassword);
+                // 更新信息
+                userService.updateUserPassword(id, newPassword);
+                return ResponseEntity.ok().build();
+            } else {
+                return ResponseEntity.notFound().build();
+            }
+        } else {
+            return ResponseEntity.badRequest().build();
+        }
+    }
 
 
 
