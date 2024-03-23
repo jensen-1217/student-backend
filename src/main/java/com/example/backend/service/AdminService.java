@@ -14,17 +14,17 @@ public class AdminService {
         this.adminRepository = adminRepository;
     }
 
-    public Admin createAdmin(String username, String name, String password) {
+    public Admin createAdmin(String adminId, String name, String password) {
         Admin newAdmin = new Admin();
-        newAdmin.setUsername(username);
+        newAdmin.setAdminId(adminId);
         newAdmin.setName(name);
         String encryptedPassword = PasswordUtil.encryptPassword(password);
         newAdmin.setPassword(encryptedPassword);
         return adminRepository.save(newAdmin);
     }
 
-    public Admin findByAdminId(String username) {
-        return adminRepository.findByUsername(username);
+    public Admin findByAdminId(String adminId) {
+        return adminRepository.findByAdminId(adminId);
     }
 
     public Admin addAdmin(Admin admin) {

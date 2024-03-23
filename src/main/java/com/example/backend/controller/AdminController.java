@@ -27,7 +27,7 @@ public class AdminController {
 
         // 创建管理员用户并保存到数据库
         Admin admin = new Admin();
-        admin.setUsername("20561340209");
+        admin.setAdminId("20561340209");
         admin.setName("管理员");
         String encryptedPassword = PasswordUtil.encryptPassword("123456");
         admin.setPassword(encryptedPassword);

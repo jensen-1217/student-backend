@@ -6,17 +6,27 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
-public class Admin {
+public class UserInfo {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String adminId; // 管理员工号
-    private String name; // 姓名
-    private String password; // 密码
+    private String username;
+
+    private String password;
+
+    private String role;
 
     // 默认构造函数
-    public Admin() {
+    public UserInfo() {
+    }
+
+    // 带参数的构造函数
+    public UserInfo(String username, String password, String role) {
+        this.username = username;
+        this.password = password;
+        this.role = role;
     }
 
     // Getter 和 Setter 方法
@@ -28,20 +38,12 @@ public class Admin {
         this.id = id;
     }
 
-    public String getAdminId() {
-        return adminId;
+    public String getUsername() {
+        return username;
     }
 
-    public void setAdminId(String adminId) {
-        this.adminId = adminId;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {
@@ -50,5 +52,13 @@ public class Admin {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 }

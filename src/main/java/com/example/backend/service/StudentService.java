@@ -82,8 +82,8 @@ public class StudentService {
         }
     }
 
-    public Student findByStudentId(String username) {
-        return studentRepository.findByUsername(username);
+   public Student findByStudentId(String studentId) {
+        return studentRepository.findByStudentId(studentId);
     }
     
     

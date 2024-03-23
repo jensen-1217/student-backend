@@ -11,7 +11,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String username; // 教师工号
+    private String employeeId; // 教师工号
     private String name; // 姓名
     private String password; // 密码
 
@@ -28,12 +28,12 @@ public class User {
         this.id = id;
     }
 
-    public String getusername() {
-        return username;
+    public String getEmployeeId() {
+        return employeeId;
     }
 
-    public void setusername(String username) {
-        this.username = username;
+    public void setEmployeeId(String employeeId) {
+        this.employeeId = employeeId;
     }
 
     public String getName() {
