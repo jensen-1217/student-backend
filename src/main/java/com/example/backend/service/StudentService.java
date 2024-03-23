@@ -82,6 +82,9 @@ public class StudentService {
         }
     }
 
+    public Student findByStudentId(String username) {
+        return studentRepository.findByUsername(username);
+    }
     
     
 

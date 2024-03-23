@@ -11,7 +11,7 @@ public class Admin {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String adminId; // 管理员工号
+    private String username; // 管理员工号
     private String name; // 姓名
     private String password; // 密码
 
@@ -28,12 +28,12 @@ public class Admin {
         this.id = id;
     }
 
-    public String getAdminId() {
-        return adminId;
+    public String getUsername() {
+        return username;
     }
 
-    public void setAdminId(String adminId) {
-        this.adminId = adminId;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getName() {

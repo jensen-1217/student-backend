@@ -12,7 +12,7 @@ public class Student {
     private Long id;
 
     private String name;
-    private String studentId; // 学号
+    private String username; // 学号
     private int age;
     private String gender;
     private String password;
@@ -42,12 +42,12 @@ public class Student {
         this.name = name;
     }
 
-    public String getStudentId() {
-        return studentId;
+    public String getUsername() {
+        return username;
     }
 
-    public void setStudentId(String studentId) {
-        this.studentId = studentId;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public int getAge() {
@@ -112,7 +112,7 @@ public class Student {
         return "Student{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", studentId='" + studentId + '\'' +
+                ", username='" + username + '\'' +
                 ", age=" + age +
                 ", gender='" + gender + '\'' +
                 ", password='" + password + '\'' +

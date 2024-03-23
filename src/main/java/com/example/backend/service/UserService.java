@@ -18,17 +18,17 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public User createUser(String employeeId, String name, String password) {
+    public User createUser(String username, String name, String password) {
         User newUser = new User();
-        newUser.setEmployeeId(employeeId);
+        newUser.setusername(username);
         newUser.setName(name);
         String encryptedPassword = PasswordUtil.encryptPassword(password);
         newUser.setPassword(encryptedPassword);
         return userRepository.save(newUser);
     }
 
-    public User findByEmployeeId(String employeeId) {
-        return userRepository.findByEmployeeId(employeeId);
+    public User findByEmployeeId(String username) {
+        return userRepository.findByUsername(username);
     }
 
 
