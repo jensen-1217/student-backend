@@ -2,6 +2,7 @@ package com.example.backend.controller;
 
 import com.example.backend.model.Student;
 import com.example.backend.service.StudentService;
+import com.example.backend.utils.MyResult;
 import com.example.backend.utils.PasswordUtil;
 
 import org.springframework.data.domain.Page;
@@ -23,7 +24,7 @@ public class StudentController {
     }
 
     @PostMapping("/add")
-public ResponseEntity<Map<String, Object>> addStudent(@RequestBody Student student) {
+public HashMap<String, Object> addStudent(@RequestBody Student student) {
     // 对学生密码进行加密
     String encryptedPassword = PasswordUtil.encryptPassword(student.getPassword());
     student.setPassword(encryptedPassword);
@@ -31,50 +32,46 @@ public ResponseEntity<Map<String, Object>> addStudent(@RequestBody Student stude
     Student addedStudent = studentService.addStudent(student);
     if (addedStudent != null) {
         // 学生添加成功，构建成功响应
-        Map<String, Object> response = new HashMap<>();
-        response.put("code", "200");
-        response.put("data", addedStudent);
-        return ResponseEntity.status(200).body(response);
+      return MyResult.getResultMap(200, "成功");
+        
     } else {
         // 学生添加失败，构建失败响应
-        Map<String, Object> response = new HashMap<>();
-        response.put("status", "failed");
-        return ResponseEntity.status(500).body(response);
+        return MyResult.getResultMap(420, "失败");
     }
 }
 
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<Student> updateStudent(@PathVariable Long id, @RequestBody Student student) {
+    public HashMap<String, Object> updateStudent(@PathVariable Long id, @RequestBody Student student) {
         Student updatedStudent = studentService.updateStudent(id, student);
         if (updatedStudent != null) {
-            return ResponseEntity.ok(updatedStudent);
+            return MyResult.getResultMap(200, "成功");
         } else {
-            return ResponseEntity.notFound().build();
+            return MyResult.getResultMap(420, "失败");
         }
     }
 
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<String> deleteStudent(@PathVariable Long id) {
+    public HashMap<String, Object> deleteStudent(@PathVariable Long id) {
         boolean deleted = studentService.deleteStudent(id);
         if (deleted) {
-            return ResponseEntity.ok("Student with ID " + id + " deleted successfully.");
+            return MyResult.getResultMap(200, "成功");
         } else {
-            return ResponseEntity.notFound().build();
+            return MyResult.getResultMap(420, "失败");
         }
     }
 
     @PostMapping("/search")
-    public ResponseEntity<List<Student>> getStudentsByName(@RequestBody Map<String, String> requestBody) {
+    public HashMap<String, Object> getStudentsByName(@RequestBody Map<String, String> requestBody) {
         String name = requestBody.get("name");
         if (name != null && !name.isEmpty()) {
             List<Student> students = studentService.getStudentsByName(name);
             if (!students.isEmpty()) {
-                return ResponseEntity.ok(students);
+                return MyResult.getResultMap(200, "成功",students);
             }
         }
-        return ResponseEntity.notFound().build();
+        return MyResult.getResultMap(420, "失败");
     }
 
 
